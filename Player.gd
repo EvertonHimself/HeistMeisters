@@ -21,3 +21,6 @@ func update_movement():
 		motion.x = clamp(motion.x + SPEED, 0, MAX_SPEED)
 	else:
 		motion.x = lerp(motion.x, 0, FRICTION)
+func _input(event):
+	if Input.is_action_just_pressed("flashlight"):
+		$Torch.enabled = !$Torch.enabled
