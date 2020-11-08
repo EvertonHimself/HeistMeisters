@@ -17,7 +17,7 @@ func _ready():
 
 func make_path():
 	var new_destination = possible_destinations[randi() % possible_destinations.size() - 1]
-	path = navigation.get_simple_path(position, new_destination.position)
+	path = navigation.get_simple_path(position, new_destination.position, false)
 	
 func _physics_process(delta):
 	navigate()
@@ -30,13 +30,20 @@ func navigate():
 		update_path()
 
 func move():
-	pass
+	look_at(path[0])
+	motion = (path[0] - position).normalized() * MAX_SPEED * walk_speed
+	
+	if is_on_wall():
+		make_path()
+	
+	move_and_slide(motion)
 
 func update_path():
-	if path.size() == 1 and $Timer.is_stopped():
-		$Timer.start()
+	if path.size() == 1:
+		if $Timer.is_stopped():
+			$Timer.start()
 	else:
-		path.pop_front()
+		path.remove(0)
 
 func _on_Timer_timeout():
-	pass # Replace with function body.
+	make_path()
