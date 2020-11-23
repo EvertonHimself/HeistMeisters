@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Levels/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/NPCs/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/NPCs/Guard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Doors/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Doors/LockedDoor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Computer/Computer.tscn" type="PackedScene" id=6]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -56,3 +57,9 @@ position = Vector2( 287.882, 480.432 )
 
 [node name="LockedDoor" parent="LockedDoors" index="0" instance=ExtResource( 5 )]
 position = Vector2( 287.586, 285.905 )
+
+[node name="Computer" parent="." index="7" instance=ExtResource( 6 )]
+position = Vector2( 105.342, 234.787 )
+rotation = -1.5713
+lock_group = "1"
+[connection signal="combination" from="Computer" to="LockedDoors/LockedDoor" method="_on_Computer_combination"]

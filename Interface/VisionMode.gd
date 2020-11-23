@@ -21,11 +21,15 @@ func DARK_Mode():
 	color = DARK
 	$AudioStreamPlayer2D.stream = load("res://SFX/nightvision_off.wav")
 	$AudioStreamPlayer2D.play()
+	get_tree().call_group("Lights", "show")
+	get_tree().call_group("Labels", "hide")
 
 func NIGHTVISION_Mode():
 	color = NIGHTVISION
 	$AudioStreamPlayer2D.stream = load("res://SFX/nightvision.wav")
 	$AudioStreamPlayer2D.play()
+	get_tree().call_group("Lights", "hide")
+	get_tree().call_group("Labels", "show")
 
 
 func _on_Timer_timeout():
